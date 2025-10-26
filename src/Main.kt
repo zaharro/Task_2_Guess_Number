@@ -7,58 +7,7 @@ import kotlin.random.Random
 или кастомные настройки от пользователя (запрашиваем у него желаемый диапазон и количество попыток)*/
 
 fun main() {
-    var range: Int = 0
-    var numberOfTrails: Int = 0
 
-    fun repeatGame(): Int {
-        var repeater: String
-        do {
-            println("Повторить игру еще раз? 1 - да/0 - нет")
-            repeater = readln()
-        } while (!repeater.matches(Regex("[0-1]")))
-        return repeater.toInt()
-    }
-
-    fun menu() {
-        var gameVariant: String
-        do {
-            println("Выберите вариант игры:")
-            println("1 - Базовый - интервал чисел от 0 до 10, 3 попытки")
-            println("2 - Индивидуальный - интервал чисел и число попыток выбирает пользователь")
-            println("3 - Профи - интервал чисел от 0 до 100, 7 попыток")
-            gameVariant = readln()
-        } while (!gameVariant.matches(Regex("[1-3]")))
-
-        when (gameVariant.toInt()) {
-            1 -> {
-                range = 10; numberOfTrails = 3
-            }
-
-            2 -> {
-                println("Выберите правую границу интервала")
-                range = readln().toInt()
-                println("Выберите число попыток")
-                numberOfTrails = readln().toInt()
-            }
-
-            3 -> {
-                range = 100; numberOfTrails = 7
-            }
-        }
-    }
-
-    fun generateRandomNumber(range: Int): Int {
-
-        return Random.nextInt(0, range + 1)
-    }
-
-    fun checkNumber(numberToGuess: Int, trialNumber: Int): String {
-        return if (numberToGuess < trialNumber)
-            "Загаданное число меньше"
-        else if (numberToGuess > trialNumber)
-            "Загаданное число больше"
-        else "Вы угадали!!!"
-    }
 
     do {
         menu()
@@ -81,4 +30,57 @@ fun main() {
 
     } while (repeatGame() == 1)
     println("GAME OVER!!!")
+}
+
+var range: Int = 0
+var numberOfTrails: Int = 0
+
+fun repeatGame(): Int {
+    var repeater: String
+    do {
+        println("Повторить игру еще раз? 1 - да/0 - нет")
+        repeater = readln()
+    } while (!repeater.matches(Regex("[0-1]")))
+    return repeater.toInt()
+}
+
+fun menu() {
+    var gameVariant: String
+    do {
+        println("Выберите вариант игры:")
+        println("1 - Базовый - интервал чисел от 0 до 10, 3 попытки")
+        println("2 - Индивидуальный - интервал чисел и число попыток выбирает пользователь")
+        println("3 - Профи - интервал чисел от 0 до 100, 7 попыток")
+        gameVariant = readln()
+    } while (!gameVariant.matches(Regex("[1-3]")))
+
+    when (gameVariant.toInt()) {
+        1 -> {
+            range = 10; numberOfTrails = 3
+        }
+
+        2 -> {
+            println("Выберите правую границу интервала")
+            range = readln().toInt()
+            println("Выберите число попыток")
+            numberOfTrails = readln().toInt()
+        }
+
+        3 -> {
+            range = 100; numberOfTrails = 7
+        }
+    }
+}
+
+fun generateRandomNumber(range: Int): Int {
+
+    return Random.nextInt(0, range + 1)
+}
+
+fun checkNumber(numberToGuess: Int, trialNumber: Int): String {
+    return if (numberToGuess < trialNumber)
+        "Загаданное число меньше"
+    else if (numberToGuess > trialNumber)
+        "Загаданное число больше"
+    else "Вы угадали!!!"
 }
